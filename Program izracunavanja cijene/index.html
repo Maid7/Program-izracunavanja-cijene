@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Izracunavanje cijene</title>
+  </head>
+  <body>
+    <h1><span>Vjezba</span></h1>
+    <h2 id="h2">
+      Cijena po kvadratu zavisi od kolicine kvadrature koja treba da se <br />
+      radi,i dimenziji plocica
+    </h2>
+    <h3>Unesite broj kvadrata i dimenzije plocica za izracunavanje cijene</h3>
+    <!-- Pitanje 1 -->
+
+    <article>
+      <!-- Prvi dio -->
+      <label for="tbuser">Kvadratura:</label>
+      <input type="number" id="tbuser" placeholder="Unesiti broj kvadrata" />
+
+      <p class="output"></p>
+
+      <!-- Drugi dio -->
+      <label>Dimenzije Plocica:</label>
+      <select id="select" multiple="multiple">
+        <option id="one" value="30 x 30">30 x 60</option>
+        <option id="two" value="60 x 60">60 x 60</option>
+        <option id="three" value="120 x 60">120 x 60</option>
+      </select>
+      <label id="output1"></label>
+      <input type="button" id="btn2" value="Ukupna cijena" />
+      <p class="output1 hidden"></p>
+    </article>
+
+    <button class="btn3">Izracunaj ponovo</button>
+
+    <!-- Javascript -->
+    <script>
+      const txt1 = document.getElementById("tbuser");
+      const btn1 = document.getElementById("btn1");
+      const out1 = document.getElementById("output1");
+
+      const opt1 = document.getElementById("one");
+      const opt2 = document.getElementById("two");
+      const opt3 = document.getElementById("three");
+      const out2 = document.querySelector(".output1");
+      const btn2 = document.getElementById("btn2");
+
+      const btn3 = document.querySelector(".btn3");
+
+      const result = function fun1() {
+        let output = document.getElementById("output1");
+        output.value = "";
+        const x = document.getElementById("select");
+        for (let i = 0; i < x.options.length; i++) {
+          if (
+            x.options[0].selected === true ||
+            (x.options[1].selected === true && txt1.value <= 200)
+          ) {
+            output.value = "Ukupan iznos  " + txt1.value * 15 + "KM";
+            document.getElementById("output1").innerHTML = output.value;
+            const btn2 = (document.getElementById("btn2").style.display =
+              "none");
+          } else if (x.options[2].selected === true && txt1.value > 0) {
+            output.value = "Ukupan iznos  " + txt1.value * 20 + "KM";
+            document.getElementById("output1").innerHTML = output.value;
+            const btn2 = (document.getElementById("btn2").style.display =
+              "none");
+          } else if (
+            x.options[1].selected === true ||
+            (x.options[0].selected === true && txt1.value >= 200)
+          ) {
+            output.value = "Ukupan iznos  " + txt1.value * 12 + "KM";
+            document.getElementById("output1").innerHTML = output.value;
+            const btn2 = (document.getElementById("btn2").style.display =
+              "none");
+          }
+        }
+      };
+
+      btn2.addEventListener("click", result);
+      btn3.addEventListener("click", function () {
+        txt1.value = "";
+        const btn2 = (document.getElementById("btn2").style.display = "block");
+      });
+    </script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </body>
+</html>
